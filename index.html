@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102b55">
+<title>Digi | Be Aware. Be Safe. Be Digi.</title>
+<style>
+:root{--navy:#102b55;--blue:#2876e8;--purple:#6552e8;--ink:#14284b;--muted:#60708b;--paper:#f7fbff;--line:#e3ebf7}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper)}
+a{color:inherit;text-decoration:none}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,6vw,88px);position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid #e9eff8}
+.brand{font-weight:900;font-size:1.55rem;display:flex;align-items:center;gap:10px;letter-spacing:-.7px;color:var(--navy)}
+.brand-icon{display:grid;place-items:center;background:linear-gradient(140deg,#2876e8,#6552e8);color:white;width:38px;height:38px;border-radius:13px;font-size:1.15rem;box-shadow:0 8px 18px #2876e833}
+.navlinks{display:flex;gap:28px;align-items:center;font-size:.92rem;font-weight:650;color:#435471}
+.navlinks a:hover,.navlinks a.active{color:var(--blue)}
+.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;border-radius:999px;background:var(--navy);color:white;font-weight:750;border:0;cursor:pointer;transition:.2s;box-shadow:0 8px 20px #102b5522}
+.nav-cta:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px #102b5530}
+.menu-btn{display:none;border:0;background:#eef4ff;color:var(--navy);border-radius:12px;padding:10px;font-size:1.2rem}
+section{min-height:calc(100vh - 76px);scroll-snap-align:start;padding:70px clamp(22px,7vw,100px);display:flex;align-items:center;position:relative;overflow:hidden}
+.container{width:min(1180px,100%);margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:2.5px;font-size:.75rem;font-weight:850;color:var(--blue);margin-bottom:18px}
+h1,h2,h3{letter-spacing:-1.4px;line-height:1.08}
+h1{font-size:clamp(3rem,6.7vw,6.1rem);max-width:700px;margin-bottom:24px}
+h2{font-size:clamp(2.25rem,4.4vw,4rem);margin-bottom:18px}
+h3{font-size:1.25rem;letter-spacing:-.4px;margin-bottom:10px}
+p{line-height:1.75;color:var(--muted)}
+.hero{background:radial-gradient(ellipse at 78% 30%,#d8eaff 0,transparent 35%),radial-gradient(ellipse at 18% 92%,#eee4ff 0,transparent 34%),linear-gradient(120deg,#fbfdff,#f0f8ff)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}
+.hero h1 span{color:var(--purple);position:relative}
+.hero-copy{font-size:1.08rem;max-width:550px;margin-bottom:28px}
+.button-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn.primary{background:linear-gradient(110deg,var(--blue),var(--purple))}
+.btn.secondary{background:white;color:var(--navy);border:1px solid var(--line);box-shadow:none}
+.hero-art{min-height:420px;display:grid;place-items:center;position:relative}
+.orbit{width:min(430px,90%);aspect-ratio:1;border-radius:42% 58% 58% 42% / 44% 44% 56% 56%;background:linear-gradient(145deg,#c8e4ff,#e9dcff 60%,#d7fff0);display:grid;place-items:center;position:relative;transform:rotate(-4deg)}
+.shield{width:155px;height:180px;background:linear-gradient(150deg,#438cf3,#6653e8);clip-path:polygon(50% 0,92% 16%,88% 60%,72% 82%,50% 100%,28% 82%,12% 60%,8% 16%);display:grid;place-items:center;color:white;font-size:4rem;filter:drop-shadow(0 18px 15px #3454a344);transform:rotate(4deg)}
+.float{position:absolute;background:#fff;border:1px solid #fff;border-radius:18px;padding:15px 17px;box-shadow:0 15px 40px #244c7b18;font-weight:800;color:var(--navy);font-size:.88rem;transform:rotate(4deg)}
+.float small{display:block;font-weight:550;color:var(--muted);margin-top:4px}
+.f1{top:10%;left:-1%}.f2{right:-2%;top:28%}.f3{bottom:9%;left:5%}.f4{right:1%;bottom:5%}
+.slide-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:.76rem;color:#7d8da6;display:flex;gap:8px;align-items:center}
+.dots{display:flex;gap:7px}.dots i{width:7px;height:7px;background:#c5d4e9;border-radius:50%;display:block}.dots i:first-child{background:var(--blue)}
+.about{background:linear-gradient(125deg,#fff8ff,#f5f2ff)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.note{font-size:1.1rem;max-width:610px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.stat{padding:24px;border:1px solid #ece5ff;border-radius:22px;background:#ffffffc9}
+.stat .emoji{font-size:1.65rem;display:block;margin-bottom:14px}
+.stat strong{display:block;font-size:1.05rem;margin-bottom:6px}
+.stat p{font-size:.9rem}
+.features{background:linear-gradient(120deg,#f5fbff,#f4fff9)}
+.section-head{text-align:center;max-width:720px;margin:0 auto 38px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.card{background:white;border:1px solid var(--line);border-radius:24px;padding:25px 22px;box-shadow:0 12px 35px #214e7b08;transition:.22s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 38px #214e7b13}
+.icon{height:52px;width:52px;border-radius:17px;display:grid;place-items:center;font-size:1.55rem;background:#e2f1ff;margin-bottom:22px}
+.card:nth-child(2) .icon{background:#e0fff0}.card:nth-child(3) .icon{background:#eee5ff}.card:nth-child(4) .icon{background:#fff0d6}
+.card p{font-size:.92rem}
+.tips{background:linear-gradient(120deg,#f8fbff,#f7f3ff)}
+.tip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.tip{display:flex;gap:15px;padding:23px;background:#ffffffd9;border:1px solid var(--line);border-radius:20px}
+.tip .icon{flex:0 0 48px;width:48px;height:48px;margin:0;border-radius:15px;font-size:1.35rem}
+.tip p{font-size:.9rem}
+.callout{margin-top:28px;padding:24px 28px;border-radius:22px;background:linear-gradient(100deg,#dcecff,#ece4ff);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.callout p{color:#344b70}
+.resources{background:#fff9f1}
+.resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.resource{padding:27px;background:white;border:1px solid #f3e6d6;border-radius:22px}
+.resource a{display:inline-block;margin-top:18px;font-weight:800;color:var(--blue)}
+.contact{background:linear-gradient(130deg,#102b55,#172e60 65%,#34317d);color:white;min-height:72vh}
+.contact p{color:#c7d4eb}
+.contact .eyebrow{color:#a8c8ff}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.contact h2{max-width:580px}
+.contact-box{background:#ffffff12;border:1px solid #ffffff25;border-radius:24px;padding:30px}
+.contact-box a{color:#d9e7ff;text-decoration:underline;text-underline-offset:4px}
+footer{background:#0b2043;color:#aebdd7;padding:22px clamp(22px,7vw,100px);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:.83rem}
+footer strong{color:white}
+.back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;background:var(--blue);color:white;border:0;font-size:1.25rem;box-shadow:0 8px 25px #102b5533;cursor:pointer;z-index:5}
+@media(max-width:900px){.hero-grid,.two-col,.contact-grid{grid-template-columns:1fr;gap:35px}.hero-art{min-height:350px}.cards{grid-template-columns:repeat(2,1fr)}.tip-grid{grid-template-columns:repeat(2,1fr)}.resource-grid{grid-template-columns:1fr 1fr}.hero{padding-top:55px}}
+@media(max-width:620px){nav{height:66px;padding:0 18px}.menu-btn{display:block}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;background:white;padding:20px;box-shadow:0 15px 25px #102b5515;flex-direction:column;gap:18px}.navlinks.open{display:flex}.nav-cta{display:none}section{min-height:auto;padding:65px 22px}.hero h1{font-size:3.2rem}.hero-art{min-height:290px}.float{font-size:.72rem;padding:10px 12px}.shield{width:115px;height:140px;font-size:3rem}.cards,.tip-grid,.resource-grid,.stat-grid{grid-template-columns:1fr}.callout{align-items:flex-start;flex-direction:column}.slide-hint{display:none}footer{flex-direction:column}.brand{font-size:1.3rem}}
+
+/* Digi additions: quiz, phishing awareness, feedback and local admin demo */
+.extra-section{padding:70px clamp(22px,7vw,100px);display:block;min-height:auto}
+.quiz-section{background:linear-gradient(120deg,#eef7ff,#f4f0ff)}
+.phishing-section{background:linear-gradient(120deg,#f4fff9,#f4f8ff)}
+.review-section{background:linear-gradient(120deg,#fff8f1,#f5f2ff)}
+.panel{max-width:850px;margin:26px auto 0;background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 12px 35px #214e7b0b}
+.question{padding:20px 0;border-bottom:1px solid var(--line)}
+.question:last-child{border-bottom:0}
+.question h3{font-size:1.05rem;line-height:1.45;margin-bottom:14px}
+.option{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;margin:8px 0;border:1px solid var(--line);border-radius:12px;cursor:pointer;color:#40516d}
+.option:hover{background:#f5f8ff}
+.option input{margin-top:5px;accent-color:var(--blue)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+.field.full{grid-column:1/-1}
+.field label{font-weight:750;font-size:.9rem;color:var(--ink)}
+.field input,.field textarea,.field select{width:100%;border:1px solid #d9e3f1;border-radius:12px;padding:13px;font:inherit;color:var(--ink);background:white}
+.field textarea{min-height:110px;resize:vertical}
+.result{margin-top:18px;padding:16px;border-radius:14px;background:#edf5ff;color:var(--navy);font-weight:700}
+.small-note{font-size:.83rem;margin-top:12px}
+.review-list{display:grid;gap:12px;margin-top:20px}
+.review-item{border:1px solid var(--line);border-radius:15px;padding:17px;background:#fbfdff}
+.review-item p{margin-top:7px}
+.admin-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.danger{background:#9b2638}
+.success{background:#18794e}
+.phish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.phish-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.phish-card p{font-size:.92rem}
+.admin-panel[hidden],.result[hidden]{display:none}
+@media(max-width:700px){.form-grid,.phish-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="#home"><span class="brand-icon">✦</span>Digi</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+  <div class="navlinks" id="navlinks">
+    <a class="active" href="#home">Home</a><a href="#about">About</a><a href="#features">What You'll Find</a><a href="#tips">Safety Tips</a><a href="#resources">Resources</a><a href="#quiz">Quiz</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="#tips">Stay Safe <span>↗</span></a>
+</nav>
+
+<main>
+<section class="hero" id="home">
+ <div class="container hero-grid">
+  <div>
+   <div class="eyebrow">Your digital safety matters</div>
+   <h1>Be Aware.<br>Be Safe.<br>Be <span>Digi.</span></h1>
+   <p class="hero-copy">Explore. Connect. Create. But always stay safe. Learn how to protect your digital footprint and make smarter choices online.</p>
+   <div class="button-row"><a class="btn primary" href="#about">Explore Digi <span>→</span></a><a class="btn secondary" href="#tips">Quick safety tips</a></div>
+  </div>
+  <div class="hero-art" aria-label="Digital safety illustration">
+   <div class="orbit"><div class="shield">🔒</div></div>
+   <div class="float f1">🛡️ Privacy first<small>Your data matters</small></div>
+   <div class="float f2">🌐 Think before sharing</div>
+   <div class="float f3">🔎 Check the source</div>
+   <div class="float f4">💙 Be kind online</div>
+  </div>
+ </div>
+ <div class="slide-hint"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span> Scroll to explore each slide</div>
+</section>
+
+<section class="about" id="about">
+ <div class="container two-col">
+  <div><div class="eyebrow">01 / About Digi</div><h2>Your online life deserves protection.</h2><p class="note">Every post, like, comment and search can leave a digital footprint. Digi helps you understand that footprint, spot online risks and build safer digital habits—one small step at a time.</p><div style="margin-top:25px"><a class="btn primary" href="#features">Discover our guides →</a></div></div>
+  <div class="stat-grid">
+   <div class="stat"><span class="emoji">🔐</span><strong>Protect privacy</strong><p>Keep personal information safe and private.</p></div>
+   <div class="stat"><span class="emoji">🛡️</span><strong>Avoid online risks</strong><p>Recognise scams, fraud and suspicious links.</p></div>
+   <div class="stat"><span class="emoji">🧠</span><strong>Make smart choices</strong><p>Pause and think before you post or share.</p></div>
+   <div class="stat"><span class="emoji">🌱</span><strong>Build good habits</strong><p>Create a positive and responsible online presence.</p></div>
+  </div>
+ </div>
+ <div class="slide-hint"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span> Slide 2 — About Digi</div>
+</section>
+
+<section class="features" id="features">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">02 / Explore</div><h2>What you'll find here</h2><p>Simple, useful and easy-to-follow guides to help you stay safe online.</p></div>
+  <div class="cards">
+   <article class="card"><div class="icon">👣</div><h3>Digital Footprint</h3><p>Understand what you share online and how it can affect your future.</p></article>
+   <article class="card"><div class="icon">💡</div><h3>Safety Tips</h3><p>Learn practical habits for safer social media, apps and websites.</p></article>
+   <article class="card"><div class="icon">📚</div><h3>Useful Resources</h3><p>Explore helpful links and learn where to get more information.</p></article>
+   <article class="card"><div class="icon">🤝</div><h3>Community</h3><p>Help create a kinder, safer and more responsible online community.</p></article>
+  </div>
+ </div>
+ <div class="slide-hint"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span> Slide 3 — Key Features</div>
+</section>
+
+<section class="tips" id="tips">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">03 / Quick tips</div><h2>Stay safe online</h2><p>A few small habits can make a big difference.</p></div>
+  <div class="tip-grid">
+   <article class="tip"><div class="icon">🔒</div><div><h3>Use strong passwords</h3><p>Use unique passwords and turn on two-factor authentication where possible.</p></div></article>
+   <article class="tip"><div class="icon">💬</div><div><h3>Think before sharing</h3><p>Never post your address, phone number or private details publicly.</p></div></article>
+   <article class="tip"><div class="icon">🔗</div><div><h3>Be careful with links</h3><p>Avoid unknown links and check the sender before opening attachments.</p></div></article>
+   <article class="tip"><div class="icon">⚙️</div><div><h3>Check privacy settings</h3><p>Review who can see your posts, profile and personal information.</p></div></article>
+   <article class="tip"><div class="icon">📰</div><div><h3>Spot fake news</h3><p>Check the source and compare information before sharing it.</p></div></article>
+   <article class="tip"><div class="icon">💗</div><div><h3>Be kind online</h3><p>Respect others, report abuse and never join cyberbullying.</p></div></article>
+  </div>
+  <div class="callout"><div><h3>Pause. Check. Then click.</h3><p>Your safety starts with the choices you make every day.</p></div><a class="btn primary" href="#resources">Explore resources →</a></div>
+ </div>
+ <div class="slide-hint"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span> Slide 4 — Safety Tips</div>
+</section>
+
+<section class="resources" id="resources">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">04 / Learn more</div><h2>Helpful resources</h2><p>Start with trusted information and keep learning about digital safety.</p></div>
+  <div class="resource-grid">
+   <article class="resource"><div class="icon">🇮🇳</div><h3>Cyber Crime Portal</h3><p>India's official portal for reporting cybercrime and learning about online safety.</p><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener">Visit portal ↗</a></article>
+   <article class="resource"><div class="icon">🛡️</div><h3>Stay Cyber Safe</h3><p>Explore government guidance for protecting yourself in the digital world.</p><a href="https://www.cert-in.org.in/" target="_blank" rel="noopener">Visit CERT-In ↗</a></article>
+   <article class="resource"><div class="icon">🧭</div><h3>Think before you click</h3><p>Check website addresses, verify claims and avoid sharing unconfirmed information.</p><a href="#tips">Review safety tips ↑</a></article>
+  </div>
+ </div>
+ <div class="slide-hint"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span> Slide 5 — Resources</div>
+</section>
+
+
+<section class="extra-section quiz-section" id="quiz">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">06 / Test your knowledge</div><h2>Digital Safety Quiz</h2><p>Choose the safest answer for each question, then check your score.</p></div>
+  <div class="panel">
+   <form id="quizForm">
+    <div id="quizQuestions"></div>
+    <button class="btn primary" type="submit">Check my score →</button>
+    <button class="btn secondary" type="button" id="resetQuiz">Try again</button>
+   </form>
+   <div class="result" id="quizResult" hidden aria-live="polite"></div>
+  </div>
+ </div>
+</section>
+
+<section class="extra-section phishing-section" id="phishing">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">07 / Spot the warning signs</div><h2>Spam & phishing awareness</h2><p>Scammers often try to create urgency or trick you into sharing sensitive information.</p></div>
+  <div class="phish-grid">
+   <article class="phish-card"><div class="icon">🎣</div><h3>Suspicious links</h3><p>Check the website address carefully. Don't open unexpected links or attachments, even if a message looks familiar.</p></article>
+   <article class="phish-card"><div class="icon">⏰</div><h3>Urgent threats</h3><p>Messages claiming your account will close immediately may be trying to rush you. Verify through the official app or website.</p></article>
+   <article class="phish-card"><div class="icon">🔑</div><h3>Requests for secrets</h3><p>Never share passwords, PINs, OTPs or banking details with someone who contacts you unexpectedly.</p></article>
+  </div>
+  <div class="callout"><div><h3>Received a suspicious message?</h3><p>Don't reply, click or forward it. Verify independently and report it through the appropriate official channel.</p></div><a class="btn primary" href="https://cybercrime.gov.in/" target="_blank" rel="noopener">Cyber Crime Portal ↗</a></div>
+ </div>
+</section>
+
+<section class="extra-section resources" id="emergency">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">08 / Get help</div><h2>Emergency cyber help in India</h2><p>If you experience cyber financial fraud, act quickly and contact official support.</p></div>
+  <div class="resource-grid">
+   <article class="resource"><div class="icon">📞</div><h3>Call 1930</h3><p>For cyber financial fraud in India, call the national helpline 1930 as soon as possible.</p></article>
+   <article class="resource"><div class="icon">🖥️</div><h3>Report online</h3><p>Use the official National Cyber Crime Reporting Portal to submit a complaint.</p><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener">Open official portal ↗</a></article>
+   <article class="resource"><div class="icon">🏦</div><h3>Contact your bank</h3><p>If money or banking details are involved, contact your bank using the number on its official website or card.</p></article>
+  </div>
+  <p class="small-note">Keep transaction IDs, messages and screenshots as evidence. Never share an OTP or PIN with anyone claiming to help.</p>
+ </div>
+</section>
+
+<section class="extra-section review-section" id="reviews">
+ <div class="container">
+  <div class="section-head"><div class="eyebrow">09 / Your voice matters</div><h2>Reviews & feedback</h2><p>Share what you learned or suggest how Digi can improve.</p></div>
+  <div class="panel">
+   <form id="reviewForm">
+    <div class="form-grid">
+     <div class="field"><label for="reviewName">Your name (optional)</label><input id="reviewName" maxlength="60" placeholder="Name"></div>
+     <div class="field"><label for="reviewRating">Rating</label><select id="reviewRating" required><option value="">Choose a rating</option><option value="5">★★★★★ — Excellent</option><option value="4">★★★★ — Very good</option><option value="3">★★★ — Good</option><option value="2">★★ — Needs improvement</option><option value="1">★ — Poor</option></select></div>
+     <div class="field full"><label for="reviewMessage">Your feedback</label><textarea id="reviewMessage" required maxlength="1000" placeholder="Write your feedback here..."></textarea></div>
+    </div>
+    <button class="btn primary" type="submit">Submit feedback →</button>
+   </form>
+   <div class="result" id="reviewNotice" hidden aria-live="polite"></div>
+   <p class="small-note">Feedback is submitted to Digi for review. Do not enter passwords, OTPs, banking details or other sensitive information.</p>
+  </div>
+  <div class="section-head" style="margin-top:45px"><h2 style="font-size:2rem">Approved reviews</h2><p>Reviews appear here after admin approval.</p></div>
+  <div class="review-list" id="approvedReviews"><p>Loading approved reviews…</p></div>
+  <div class="panel admin-panel" id="adminPanel" hidden>
+   <h3>Admin login</h3>
+   <p>Sign in with the admin email and password you created in Firebase Authentication.</p>
+   <form id="adminLoginForm">
+    <div class="field"><label for="adminEmail">Admin email</label><input id="adminEmail" type="email" autocomplete="username" required></div>
+    <div class="field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" required></div>
+    <button class="btn primary" type="submit">Sign in</button>
+    <button class="btn secondary" type="button" id="adminLogout" hidden>Sign out</button>
+   </form>
+   <div class="result" id="adminNotice" hidden aria-live="polite"></div>
+   <div id="pendingReviews" class="review-list"></div>
+  </div>
+  <div style="text-align:center;margin-top:24px"><button class="btn secondary" type="button" id="adminToggle">Admin login</button></div>
+ </div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="container contact-grid">
+  <div><div class="eyebrow">05 / Let's make the internet safer</div><h2>Stay curious.<br>Stay careful.<br>Stay <span style="color:#a8c8ff">Digi.</span></h2><p class="note">A safer digital world starts with awareness. Share what you learn and encourage your friends to make smart online choices.</p><div class="button-row" style="margin-top:26px"><a class="btn" style="background:white;color:var(--navy)" href="#home">Back to home ↑</a></div></div>
+  <div class="contact-box"><div class="eyebrow">About this project</div><h3 style="font-size:1.6rem;margin-bottom:14px">Social Media Safety & Digital Footprints</h3><p>This awareness website is designed to help users understand digital footprints, online privacy and responsible social media use.</p><hr style="border:0;border-top:1px solid #ffffff30;margin:23px 0"><p><strong style="color:white">Remember:</strong> Think before you post. Protect your privacy. Treat others with respect.</p><p style="margin-top:18px">Official cybercrime reporting: <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener">cybercrime.gov.in</a></p></div>
+ </div>
+</section>
+</main>
+<footer><span>© 2026 <strong>Digi</strong> · Digital awareness for everyone</span><span>Be Aware · Be Safe · Be Digi 💙</span></footer>
+<button class="back-top" id="backTop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+const menuBtn=document.getElementById('menuBtn'), navlinks=document.getElementById('navlinks');
+menuBtn.addEventListener('click',()=>navlinks.classList.toggle('open'));
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+document.getElementById('backTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+const sections=[...document.querySelectorAll('main section')], links=[...document.querySelectorAll('.navlinks a')];
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+entry.target.id));}}),{threshold:.45});
+sections.forEach(section=>observer.observe(section));
+
+// Interactive Digital Safety Quiz
+const quizData = [
+ {q:"You receive an unexpected message asking for your OTP. What should you do?",a:["Share it if the sender knows your name","Never share it; verify independently","Reply asking why they need it"],correct:1,why:"An OTP is private. Never share it with anyone."},
+ {q:"Which password habit is safest?",a:["Use one password everywhere","Use your birthday","Use a unique, long password for each account"],correct:2,why:"Unique passwords reduce the damage if one account is compromised."},
+ {q:"A delivery message contains an unfamiliar shortened link. What is safest?",a:["Click quickly before it expires","Verify through the courier's official app or website","Forward it to friends"],correct:1,why:"Unexpected links can lead to fake websites or malware."},
+ {q:"What is a digital footprint?",a:["The trace of your activities online","Only your profile picture","A computer's physical mark"],correct:0,why:"Posts, likes, comments and other online activity can create a digital footprint."},
+ {q:"What should you do if you face cyber financial fraud in India?",a:["Wait a few days","Post your bank details online","Call 1930 promptly and contact your bank"],correct:2,why:"Report quickly through official channels and contact your bank."}
+];
+const quizQuestions = document.getElementById('quizQuestions');
+function renderQuiz(){
+ quizQuestions.innerHTML = quizData.map((item,i)=>`<div class="question"><h3>${i+1}. ${item.q}</h3>${item.a.map((choice,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}" required><span>${choice}</span></label>`).join('')}</div>`).join('');
+ document.getElementById('quizResult').hidden = true;
+}
+document.getElementById('quizForm').addEventListener('submit',e=>{
+ e.preventDefault();let score=0,details=[];
+ quizData.forEach((q,i)=>{const chosen=document.querySelector(`input[name="q${i}"]:checked`);if(chosen&&Number(chosen.value)===q.correct)score++;details.push(`${i+1}. ${chosen&&Number(chosen.value)===q.correct?'Correct':'Review'} — ${q.why}`);});
+ const result=document.getElementById('quizResult');result.innerHTML=`You scored ${score} out of ${quizData.length}.<br><br>${details.map(x=>`<div style="margin:7px 0;font-weight:500">${x}</div>`).join('')}`;result.hidden=false;
+});
+document.getElementById('resetQuiz').addEventListener('click',renderQuiz);renderQuiz();
+
+// Review and admin features are handled by the Firebase module below.
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, query, where, orderBy, onSnapshot,
+  serverTimestamp, doc, updateDoc, deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBV_suUAGF0EkHrC5EYhJ8W7gNnoHYrArk",
+  authDomain: "digi-5038c.firebaseapp.com",
+  projectId: "digi-5038c",
+  storageBucket: "digi-5038c.firebasestorage.app",
+  messagingSenderId: "718998354771",
+  appId: "1:718998354771:web:a5e4c09dc15da01dfcbfa6",
+  measurementId: "G-7CERKYNF8R"
+};
+
+// Admin identity is also enforced by Firestore Security Rules, not just by this UI.
+const ADMIN_UID = "LWExkIchAwX4QtGGShwVrQXD2eF3";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const reviewForm = document.getElementById("reviewForm");
+const reviewNotice = document.getElementById("reviewNotice");
+const approvedTarget = document.getElementById("approvedReviews");
+const adminPanel = document.getElementById("adminPanel");
+const adminToggle = document.getElementById("adminToggle");
+const adminLoginForm = document.getElementById("adminLoginForm");
+const adminNotice = document.getElementById("adminNotice");
+const pendingTarget = document.getElementById("pendingReviews");
+const logoutButton = document.getElementById("adminLogout");
+
+function safeText(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c =>
+    ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c])
+  );
+}
+function notice(el, message, isError=false) {
+  el.textContent = message;
+  el.hidden = false;
+  el.style.background = isError ? "#fff0f0" : "#edf5ff";
+}
+function renderApproved(snapshot) {
+  const rows = snapshot.docs.map(d => ({ id:d.id, ...d.data() }));
+  approvedTarget.innerHTML = rows.length ? rows.map(x =>
+    `<article class="review-item"><strong>${safeText(x.name || "Anonymous")}</strong> <span>${"★".repeat(Number(x.rating)||0)}${"☆".repeat(5-(Number(x.rating)||0))}</span><p>${safeText(x.message)}</p></article>`
+  ).join("") : "<p>No approved reviews yet.</p>";
+}
+function renderPending(snapshot) {
+  const rows = snapshot.docs.map(d => ({ id:d.id, ...d.data() }));
+  pendingTarget.innerHTML = rows.length ? rows.map(x =>
+    `<article class="review-item"><strong>${safeText(x.name || "Anonymous")}</strong> · ${"★".repeat(Number(x.rating)||0)}<p>${safeText(x.message)}</p><p><strong>Status:</strong> ${x.approved ? "Approved" : "Pending"}</p><div class="admin-tools">${x.approved ? "" : `<button class="btn success" type="button" data-approve="${x.id}">Approve</button>`}<button class="btn danger" type="button" data-delete="${x.id}">Delete</button></div></article>`
+  ).join("") : "<p>No feedback submitted yet.</p>";
+  pendingTarget.querySelectorAll("[data-approve]").forEach(button => button.addEventListener("click", async () => {
+    try { await updateDoc(doc(db, "reviews", button.dataset.approve), { approved:true }); }
+    catch (e) { notice(adminNotice, "Could not approve review: " + e.message, true); }
+  }));
+  pendingTarget.querySelectorAll("[data-delete]").forEach(button => button.addEventListener("click", async () => {
+    if (!confirm("Permanently delete this review?")) return;
+    try { await deleteDoc(doc(db, "reviews", button.dataset.delete)); }
+    catch (e) { notice(adminNotice, "Could not delete review: " + e.message, true); }
+  }));
+}
+
+reviewForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  const name = document.getElementById("reviewName").value.trim().slice(0,60);
+  const rating = Number(document.getElementById("reviewRating").value);
+  const message = document.getElementById("reviewMessage").value.trim().slice(0,1000);
+  if (!rating || rating < 1 || rating > 5 || !message) return;
+  const submit = reviewForm.querySelector('button[type="submit"]');
+  submit.disabled = true;
+  try {
+    await addDoc(collection(db, "reviews"), {
+      name, rating, message, approved:false, createdAt:serverTimestamp()
+    });
+    reviewForm.reset();
+    notice(reviewNotice, "Thank you! Your feedback was submitted and is awaiting approval.");
+  } catch (e) {
+    notice(reviewNotice, "Feedback could not be submitted. Please check Firebase Rules and try again. " + e.message, true);
+  } finally { submit.disabled = false; }
+});
+
+adminToggle.addEventListener("click", () => {
+  adminPanel.hidden = false;
+  adminPanel.scrollIntoView({ behavior:"smooth", block:"center" });
+});
+adminLoginForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+  try {
+    const credential = await signInWithEmailAndPassword(auth, email, password);
+    if (credential.user.uid !== ADMIN_UID) {
+      await signOut(auth);
+      notice(adminNotice, "This account is not authorised as the Digi admin.", true);
+    }
+  } catch (e) {
+    notice(adminNotice, "Login failed. Check the admin email and password. " + e.message, true);
+  }
+});
+logoutButton.addEventListener("click", () => signOut(auth));
+
+onAuthStateChanged(auth, user => {
+  const isAdmin = !!user && user.uid === ADMIN_UID;
+  logoutButton.hidden = !isAdmin;
+  adminLoginForm.querySelector('button[type="submit"]').hidden = isAdmin;
+  document.getElementById("adminEmail").disabled = isAdmin;
+  document.getElementById("adminPassword").disabled = isAdmin;
+  if (isAdmin) {
+    notice(adminNotice, "Admin signed in. You can approve or delete submitted reviews.");
+    const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+    onSnapshot(q, renderPending, e => notice(adminNotice, "Could not load reviews: " + e.message, true));
+  } else {
+    pendingTarget.innerHTML = "";
+  }
+});
+
+const approvedQuery = query(collection(db, "reviews"), where("approved", "==", true), orderBy("createdAt", "desc"));
+onSnapshot(approvedQuery, renderApproved, e => {
+  approvedTarget.innerHTML = "<p>Approved reviews could not be loaded. Check Firestore Rules and the required index.</p>";
+  console.error("Approved reviews listener:", e);
+});
+</script>
+
+</body>
+</html>
